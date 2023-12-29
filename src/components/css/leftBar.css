@@ -1,0 +1,18 @@
+.leftBar {
+    width: 300px;
+}
+
+.leftBar .menu-items .menu {
+    text-decoration: none;
+    color: inherit;
+    transition: .2s ease;
+}
+
+.leftBar .menu-items .menu:hover {
+    color: var(--srTxtColor);
+}
+
+.leftBar .menu-items .menu,
+.leftBar .suggested-people {
+    background: var(--srBgColor);
+}

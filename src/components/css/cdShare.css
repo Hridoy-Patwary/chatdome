@@ -1,0 +1,44 @@
+.cdShare_scanIco {
+    --d: 2px;
+    /*the distance between signals*/
+    --l: 2px;
+    /*the lenght of the signals*/
+    --s: calc(var(--l) + var(--d));
+    width: calc(7*var(--s) + var(--l));
+    height: calc(7*var(--s) + var(--l));
+    display: inline-block;
+    background: /*the center*/
+    radial-gradient(circle at center, #0089ff var(--l), transparent calc(var(--l) + 1px)), /*some white to hide part of the circles*/
+    linear-gradient( 45deg, var(--miniNavBg) 50%, transparent 0), linear-gradient(-45deg, var(--miniNavBg) 50%, transparent 0), /*--*/
+    /*1*/
+    radial-gradient(circle at center, transparent calc(1*var(--s)), #0089ff calc(1*var(--s) + 1px), #0089ff calc(1*var(--s) + var(--l)), transparent calc(1*var(--s) + var(--l) + 1px)), /*2*/
+    radial-gradient(circle at center, transparent calc(2*var(--s)), #0089ff calc(2*var(--s) + 1px), #0089ff calc(2*var(--s) + var(--l)), transparent calc(2*var(--s) + var(--l) + 1px)), /*3*/
+    radial-gradient(circle at center, transparent calc(3*var(--s)), #0089ff calc(3*var(--s) + 1px), #0089ff calc(3*var(--s) + var(--l)), transparent calc(3*var(--s) + var(--l) + 1px));
+}
+
+.cdShare_scan.scanning .cdShare_scanIco {
+    animation: change 3s linear infinite;
+}
+
+@keyframes change {
+    0%,
+    20% {
+        background-size: 0, auto, auto, 0, 0, 0;
+    }
+    20%,
+    40% {
+        background-size: auto, auto, auto, 0, 0, 0;
+    }
+    40%,
+    60% {
+        background-size: auto, auto, auto, auto, 0, 0;
+    }
+    60%,
+    80% {
+        background-size: auto, auto, auto, auto, auto, 0;
+    }
+    80%,
+    100% {
+        background-size: auto, auto, auto, auto, auto, auto;
+    }
+}

@@ -1,0 +1,3 @@
+.home_page_main .container_inner {
+    grid-template-columns: 300px 1fr;
+}

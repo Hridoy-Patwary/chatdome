@@ -1,0 +1,26 @@
+{
+    "name": "server",
+    "version": "1.0.0",
+    "description": "ChatDome - backend",
+    "main": "app.js",
+    "scripts": {
+        "run": "node app.js",
+        "serve": "nodemon app.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Patwary",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.18.2",
+        "mongodb": "^5.7.0",
+        "mongoose": "^7.0.3",
+        "mongos": "^0.0.0",
+        "multer": "^1.4.5-lts.1",
+        "mysql": "^2.18.1",
+        "socket.io": "^4.6.1",
+        "ws": "^8.13.0"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.22"
+    }
+}

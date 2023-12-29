@@ -1,0 +1,56 @@
+.cd_post,
+.create-post-container {
+    background: var(--srBgColor);
+}
+
+.post-content,
+.post-bottom {
+    font-size: 14px;
+}
+
+.post-top,
+.create-post-container .heading {
+    border-bottom: 1px solid #00000014;
+}
+
+.create-post-container textarea {
+    outline: none;
+    background: none;
+    border: none;
+    color: var(--prTxtColor);
+    font-size: 16px;
+    resize: none;
+    min-height: 200px;
+}
+
+.create-post-container .post-submit {
+    color: #ededed;
+}
+
+.post-bottom .pb-buttons {
+    transition: .2s ease;
+}
+
+.post-bottom .pb-buttons:hover {
+    background: #33333317;
+}
+
+.post-bottom .ico {
+    background-image: url('../../assets/icon-list-1.png');
+    background-size: auto;
+    width: 18px;
+    height: 18px;
+    background-repeat: no-repeat;
+}
+
+.post-bottom .react .ico {
+    background-position: 0px -343px;
+}
+
+.post-bottom .comment .ico {
+    background-position: 0px -305px;
+}
+
+.post-bottom .share .ico {
+    background-position: 0px -362px;
+}

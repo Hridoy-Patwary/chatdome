@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <p class="id">0</p>
+    </div>
+    <script>
+        let ss;
+        let staticUID = ['643c1e261d6058faa17c8387', '643b63a5940d834a66c715f7'];
+
+
+        function start(x) {
+            // let xht = new XMLHttpRequest();
+            // xht.onload = function() {
+            //         console.log(this.responseText);
+            //     }
+            //     // xht.open('POST', 'http://192.168.1.110:9000/api/v1/p2p', true);
+            // xht.send(`id=${staticUID[x]}`)
+
+            const socket = new WebSocket("wss://server.patwarydev.com:7071?id=" + staticUID[x]);
+
+            ss = socket;
+            let ini = '';
+            // Connection opened
+            socket.addEventListener("open", (event) => {
+                socket.send(staticUID[x]);
+            });
+            // Listen for messages
+            socket.addEventListener("message", (e) => {
+                try {
+                    ini = JSON.parse(e.data)
+                } catch (e) {}
+                if (ini && ini.id) {
+                    document.querySelector('p.id').innerHTML = ini.id
+                }
+                const x = document.createElement('p');
+                x.innerHTML = e.data
+                document.querySelector('.container').append(x)
+            });
+            socket.addEventListener('close', (e) => {
+                console.log('Socket connection closed!');
+            })
+
+        }
+    </script>
+</body>
+
+</html>

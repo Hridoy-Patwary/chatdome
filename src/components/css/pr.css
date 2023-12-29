@@ -1,0 +1,92 @@
+.cd_profile-top {
+    height: 440px;
+}
+
+.cd_profile-top .cd_profile_cover {
+    background: url('../../assets/u/cover.jpg') no-repeat center top;
+    background-size: cover;
+}
+
+.cd_profile-top .cd_profile {
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+}
+
+.cd_profile-top .cd_profile input {
+    opacity: 0;
+}
+
+p.cd_usr-bio {
+    font-size: 15px;
+    color: #ffffff6e;
+    min-height: 25px;
+}
+
+.bio-container {
+    max-width: 70%;
+}
+
+.bio-container .bioButtonCon {
+    width: 100px;
+    transition: .2s ease;
+}
+
+.bio-container .bioButtonCon button {
+    outline: none;
+    background: none;
+    border: none;
+    fill: var(--linkColor);
+    transition: all .2s ease;
+}
+
+.bio-container .bioButtonCon button:hover {
+    filter: brightness(1.3);
+}
+
+.bio-container .bioButtonCon .closeBtn path {
+    stroke: #ababab;
+}
+
+.bio-container textarea {
+    border: none;
+    resize: none;
+    background: none;
+    outline: none;
+    color: inherit;
+    font-size: 15px;
+    width: 100%;
+}
+
+.cd_profile-top .cd_profile {
+    border: 5px solid var(--prBgColor);
+}
+
+.cd_profile-top .cd_profile.pr_bottomN20px {
+    bottom: -20px;
+}
+
+.cd_profile-top .cd_profile.pr_bottomN50prcnt {
+    bottom: -50%;
+    transform: translateY(-50%);
+}
+
+.cd_profile-top .cd_profile.pr_left {
+    right: unset;
+    left: 20px;
+}
+
+.cd_profile-top .cd_profile.pr_right {
+    left: unset;
+    right: 20px;
+}
+
+.cd_pr-top-content {
+    color: white;
+    height: 150px;
+    background: linear-gradient(to top, var(--prBgColor), transparent);
+}
+
+.cd_profile-bottom .container {
+    grid-template-columns: auto 1fr;
+}

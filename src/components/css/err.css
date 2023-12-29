@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css?family=Arvo');
+.page_404 {
+    background: #fff;
+    font-family: 'Arvo', serif;
+}
+
+.four_zero_four_bg {
+    background-image: url('../../assets/404.gif');
+    height: 400px;
+    background-position: center;
+}
+
+.four_zero_four_bg h3,
+.four_zero_four_bg h1 {
+    font-size: 80px;
+}
+
+.link_404 {
+    color: #fff;
+    background: #39ac31;
+    display: inline-block;
+}
