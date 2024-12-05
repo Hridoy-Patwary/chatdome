@@ -47,20 +47,35 @@ router.post('/lastmsg', async (rq, rs)=> {
         rs.send({status: 'error'})
     }
 })
-async function updateMsgStage(stg, msgID){
-    try {
-        // await messageModel.findById(msgID).then((msg) =>{
-        //     msg.stage = stg
-        //     msg.save()
-        // })
-    } catch (e) {
-        console.log(e)
-    }
-}
+// async function updateMsgStage(stg, msgID){
+//     try {
+//         // await messageModel.findById(msgID).then((msg) =>{
+//         //     msg.stage = stg
+//         //     msg.save()
+//         // })
+//     } catch (e) {
+//         console.log(e)
+//     }
+// }
 router.post('/chatlist', async (rq, rs)=>{
     const {id} = rq.body;
     const db = rq.app.locals.db;
-    const sql = "SELECT * FROM `messages` where `senderID` = '"+id+"' OR `receiverID` = '"+id+"' ORDER BY _id DESC";
+    // const sql = "SELECT * FROM `messages` where `senderID` = '"+id+"' OR `receiverID` = '"+id+"' ORDER BY _id DESC";
+    // const sql = `SELECT * FROM requests where type = 'accepted' AND (usr = '${id}' OR toUsr = '${id}')`;
+    const sql = `SELECT r.*, 
+                    CASE 
+                        WHEN r.usr = '${id}' THEN r.toUsr 
+                        WHEN r.toUsr = '${id}' THEN r.usr 
+                    END AS oppositeUserId, u.*
+                    FROM requests r
+                    JOIN users u ON u._id = (
+                        CASE 
+                            WHEN r.usr = '${id}' THEN r.toUsr 
+                            WHEN r.toUsr = '${id}' THEN r.usr 
+                        END
+                    )
+                    WHERE r.type = 'accepted' 
+                    AND ('${id}' IN (r.usr, r.toUsr));`;
 
     let returnVlu = {};
     try {

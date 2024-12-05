@@ -72,7 +72,7 @@ io.on("connection", (socket) => {
 });
 const dbConn = connToDB
 const db = dbConn();
-// const closeDBConnection = dbConn.endDBConn();
+
 app.locals.db = db;
 app.locals.dbConn = dbConn;
 // server endpoints

@@ -32,9 +32,13 @@ export default class App extends Component {
     });
   }
   socket = socketInitiator
+
   changeHeader = ()=>{
     this.setState({ ShowHeader: !this.state.ShowHeader });
   }
+
+
+
   changeMode = () => {
     this.setState({ darkModeEnabled: !this.state.darkModeEnabled });
     if(Cookies.get('darkThemeEnabled')){
@@ -43,6 +47,7 @@ export default class App extends Component {
     Cookies.set('darkThemeEnabled', !this.state.darkModeEnabled, { expires: 10, path: '' });
     document.documentElement.setAttribute("data-mode", this.state.darkModeEnabled ? "white" : "dark");
   };
+  
   componentDidMount(){
     document.documentElement.setAttribute("data-mode", this.state.darkModeEnabled ? "dark" : "white");
   }

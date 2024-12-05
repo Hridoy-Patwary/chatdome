@@ -111,17 +111,11 @@ wss.on('connection', (ws, rq) => {
         clients.delete(ws);
     })
 })
-router.post('/', (rq, rs)=>{
-    const { id } = rq.body;
-    // console.log(rq.body);
-    if(id){
-        // console.log(id);
-        rs.send({status: 'ok'})
-    }else{
-        rs.send({status: id})
-        return;
-    };
 
+
+router.get('/', (rq, rs)=>{
+    // const { id } = rq.body;
+    rs.send("Sorry mate, you're in the wrong place");
 })
 
 

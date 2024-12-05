@@ -3,7 +3,7 @@ const DBUsr = {
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'patwary_chatdome'
+    database: 'chatdome'
 };
 
 // const DBUsr = {

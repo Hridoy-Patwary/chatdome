@@ -66,7 +66,7 @@ export default class Chat extends Component {
     list = []
     
     getUsrList = async ()=>{
-        const dt = {id: id}
+        const dt = {id: this.id}
         const a = await fetch(uri+'/api/v1/ulist', {
             method: "POST",
             mode: "cors", 
@@ -248,23 +248,34 @@ export default class Chat extends Component {
                     // console.log(rs.data, this.list);
                 }
                 rs.data.forEach((obj, i) => {
-                    const id = obj.senderID !== this.id ? obj.senderID : obj.receiverID;
-                    const duplicateIndx = ids.indexOf(id);
+                    // const id = obj.senderID !== this.id ? obj.senderID : obj.receiverID;
+                    // const duplicateIndx = ids.indexOf(id);
 
-                    if(duplicateIndx !== -1) return;
-                    ids.push(id);
-                    const usrInfo = this.list.find((u) => u._id === parseInt(id)) || this.list.find((u) => u._id === parseInt(this.uriDef.searchParams.get('id')));
-                    // console.log(this.list, id)
+                    // if(duplicateIndx !== -1) return;
+                    // ids.push(id);
+                    // const usrInfo = this.list.find((u) => u._id === parseInt(id)) || this.list.find((u) => u._id === parseInt(this.uriDef.searchParams.get('id')));
+                    // // console.log(this.list, id)
 
                     
+                    // const chatListUsrObj = {
+                    //     id:  obj.senderID ? (obj.senderID !== this.id ? obj.senderID : obj.receiverID) : usrInfo._id,
+                    //     img: usrInfo && usrInfo.src && JSON.parse(usrInfo.src)['profile']?uri+'/'+JSON.parse(usrInfo.src)['profile']:dummyUsrImg,
+                    //     name: usrInfo.name,
+                    //     lastMsg: {
+                    //         sentOrRecived: obj.senderID === this.id?'send':'received',
+                    //         msg: obj.msg,
+                    //         stage: obj.stage
+                    //     }
+                    // }
+
                     const chatListUsrObj = {
-                        id:  obj.senderID ? (obj.senderID !== this.id ? obj.senderID : obj.receiverID) : usrInfo._id,
-                        img: usrInfo && usrInfo.src && JSON.parse(usrInfo.src)['profile']?uri+'/'+JSON.parse(usrInfo.src)['profile']:dummyUsrImg,
-                        name: usrInfo.name,
+                        id:  obj._id,
+                        img: dummyUsrImg,
+                        name: obj.name,
                         lastMsg: {
-                            sentOrRecived: obj.senderID === this.id?'send':'received',
-                            msg: obj.msg,
-                            stage: obj.stage
+                            sentOrRecived: 'received',
+                            msg: 'fuck you',
+                            stage: 'sent'
                         }
                     }
                     listComponent.push(<ChatUsr key={i} usr={chatListUsrObj} chatID={this.getChatID} />)

@@ -20,7 +20,8 @@ export default class Nav extends Component {
             searchActive: false,
             uid: Cookie.get('id'),
             uname: 'unknown',
-            uimg: props.uinfo.img
+            uimg: props.uinfo.img,
+            navExpanded: false
         }
         // this.usrInfo(this.state.uid)
     }
@@ -31,7 +32,6 @@ export default class Nav extends Component {
         }).catch(e => {
             console.error(e);
         });
-        // this.socket.
     }
     styleWiper = (elm1, elm2)=>{
         if(elm1){
@@ -49,6 +49,7 @@ export default class Nav extends Component {
         if(this.iniNav.w === 0){
             this.iniNav.w = this.navInner.clientWidth;
             this.iniNav.h = this.navInner.clientHeight;
+            this.setState({navExpanded: true});
         }else {
             this.navInner.classList.remove('inlineStyled')
             this.navInner.style.width = this.iniNav.w+'px'
@@ -56,7 +57,8 @@ export default class Nav extends Component {
             this.navInner.style.borderRadius = 50+'px'
             this.navInner.style.paddingTop = 0+'px';
             this.iniNav.w = 0;
-            this.iniNav.h = 0
+            this.iniNav.h = 0;
+            this.setState({navExpanded: false});
             return
         }
         this.navInner.classList.add('inlineStyled')
@@ -69,18 +71,20 @@ export default class Nav extends Component {
         this.navInner.style.alignItems = 'flex-start'
         this.navInner.style.justifyContent = 'flex-end'
     }
+
     handleSearch = ()=>{
         this.setState({searchActive: !this.state.searchActive, clicked: false });
         this.styleWiper(this.navInner)
         this.navExpand(300, 34)
     }
+
     handleSettings = ()=>{
         let i = Cookie.get('id')
         if(this.state.uid !== i){
             this.setState({uid: i})
-            this.usrInfo(i)
+            // this.usrInfo(i)
         }
-        this.setState({clicked: true, searchActive: false})
+        this.setState({clicked: true, searchActive: false});
         const axis = this.navSettingsContainer.getBoundingClientRect();
         this.navSettingsBtn.style.textAlign = 'right'
         this.navSettingsBtn.style.width = '100%'
@@ -106,13 +110,20 @@ export default class Nav extends Component {
         this.styleWiper(this.navSettingsBtn)
         this.navExpand(220, 300)
     }
+    handleWindowClick = (e) => {
+        const target = e.target;
+        const navMain = target.closest('.cd_mini_nav');
+        const axis = this.navSettingsContainer.getBoundingClientRect();
+
+        if(navMain || !this.state.navExpanded) return;
+
+        this.navSettingsBtn.style.textAlign = 'right'
+        this.navSettingsBtn.style.width = '100%'
+        this.styleWiper(this.notificationElm, this.notifContainer);
+        this.navExpand(axis.width, (axis.height+35));
+    }
+    
     componentDidMount(){
-        // window.onscroll = ()=>{
-        //     if(this.navInner.classList.contains('inlineStyled')){
-        //         this.styleWiper(this.navInner)
-        //         this.navInner.classList.remove('inlineStyled')
-        //     }
-        // }
         const axis = this.navInner.getBoundingClientRect()
         this.navInner.style.width = axis.width +'px';
         this.navInner.style.height = axis.height+'px';
@@ -121,9 +132,15 @@ export default class Nav extends Component {
             this.notificationElm.firstElementChild.classList.remove('cd_dn');
             this.notificationElm.firstElementChild.innerHTML = ev.detail.notification.length;
         })
-        
+
+        this.usrInfo(this.state.uid);
+        window.addEventListener('click', this.handleWindowClick);
         socket.onNotification(this.notificationElm);
     }
+    componentWillUnmount() {
+        // Remove the event listener when the component is unmounted
+        window.removeEventListener('click', this.handleClick);
+      }
 
     handleLogOut = ()=>{
         this.setState({clicked: false})
